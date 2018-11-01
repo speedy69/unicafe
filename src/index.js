@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 const Statistiikka = (props) => {
-    return <div>{props.text} {props.arvo}</div>
+    return <tr><td>{props.text}</td><td>{props.arvo}</td></tr>
 }
 
 const Statistiikat = (props) => {
@@ -19,18 +19,22 @@ const Statistiikat = (props) => {
     return (
         <div>
             <h1>Statistiikka</h1>
-            <Statistiikka arvo={props.arvot.hyva} text='hyvä' />
-            <Statistiikka arvo={props.arvot.neutraali} text='neutraali' />
-            <Statistiikka arvo={props.arvot.huono} text='huono' />
-            <Statistiikka arvo={ka.toFixed(1)} text='keskiarvo' />
-            <Statistiikka arvo={pros.toFixed(1)} text='positiivisia' />
+            <table>
+                <tbody>
+                    <Statistiikka arvo={props.arvot.hyva} text='hyvä' />
+                    <Statistiikka arvo={props.arvot.neutraali} text='neutraali' />
+                    <Statistiikka arvo={props.arvot.huono} text='huono' />
+                    <Statistiikka arvo={ka.toFixed(1)} text='keskiarvo' />
+                    <Statistiikka arvo={pros.toFixed(1)} text='positiivisia' />
+                </tbody>
+            </table>
         </div>
     )
 }
 
 const Button = (props) => {
-    return(
-        <div>          
+    return (
+        <div>
             <input type='submit' value='hyvä' onClick={props.handler('hyva')} />
             <input type='submit' value='neutraali' onClick={props.handler('neutraali')} />
             <input type='submit' value='huono' onClick={props.handler('huono')} />
@@ -49,19 +53,19 @@ class App extends React.Component {
     }
 
     handler = (arvo) => () => {
-        if(arvo === 'hyva') this.setState({ hyva: this.state.hyva +1})
-        if(arvo === 'neutraali') this.setState({ neutraali: this.state.neutraali +1})
-        if(arvo === 'huono') this.setState({ huono: this.state.huono +1})
-     }    
+        if (arvo === 'hyva') this.setState({ hyva: this.state.hyva + 1 })
+        if (arvo === 'neutraali') this.setState({ neutraali: this.state.neutraali + 1 })
+        if (arvo === 'huono') this.setState({ huono: this.state.huono + 1 })
+    }
 
     render() {
         return (
-            <div>  
-                <h1>Anna palautetta</h1>             
-                <Button  handler={this.handler} />
-                <br/>
+            <div>
+                <h1>Anna palautetta</h1>
+                <Button handler={this.handler} />
+                <br />
                 <Statistiikat arvot={this.state} />
-                
+
             </div>
         )
     }
